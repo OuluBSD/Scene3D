@@ -1,0 +1,15 @@
+uses
+	CtrlCore,
+	Geometry;
+
+file
+	AGENTS.md,
+	Core.h,
+	Geom.h,
+	Geom.cpp,
+	PointcloudTracking.h,
+	PointcloudTracking.cpp;
+
+mainconfig
+	"" = "";
+

@@ -1,0 +1,10 @@
+uses
+	CtrlCore,
+	Geometry,
+	Scene3D/Core;
+
+file
+	AGENTS.md;
+
+mainconfig
+	"" = "";

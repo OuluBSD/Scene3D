@@ -1,0 +1,45 @@
+uses
+	Docking,
+	CtrlLib,
+	CodeEditor,
+	Geometry,
+	ComputerVision,
+	ByteVM,
+	Core/TextParsing,
+	Draw/Camera,
+	Ctrl/Camera,
+	Ctrl/Automation,
+	AI/LogicGui,
+	Scene3D/Core,
+	Scene3D/IO,
+	Scene3D/Render,
+	Scene3D/Exec,
+	Eon/Ecs,
+	Eon/Draw,
+	Eon/Lib,
+	plugin/jpg,
+	plugin/enet;
+
+uses(POSIX & SOFTHMD) SoftHMD;
+
+file
+	AGENTS.md,
+	ModelerApp.h,
+	main.cpp,
+	Editor.h,
+	Editor.cpp,
+	GeomProjectCtrl.cpp,
+	RibbonCtrl.h,
+	RibbonCtrl.cpp,
+	VideoImportCtrl.h,
+	VideoImportCtrl.cpp,
+	Images.iml,
+	Trash readonly separator,
+	EditClientService.h,
+	EditClientService.cpp,
+	Remote.h,
+	Remote.cpp,
+	RemoteCtrl.cpp;
+
+mainconfig
+	"" = "GUI";

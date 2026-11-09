@@ -1,0 +1,19 @@
+uses
+	CtrlLib,
+	GLCtrl,
+	Geometry,
+	Scene3D/Core,
+	Scene3D/IO;
+
+file
+	AGENTS.md,
+	Render.h,
+	Renderer.h,
+	Renderer.cpp,
+	HeadlessTools.h,
+	HeadlessTools.cpp,
+	SoftRendCtrl.h,
+	SoftRendCtrl.cpp;
+
+mainconfig
+	"" = "";

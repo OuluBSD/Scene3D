@@ -1,0 +1,12 @@
+log("test_timeline_play_controls start")
+wait_ready()
+wait_time(0.3)
+ctl = find("Edit/Mesh Animation/Add Keyframe")
+if not ctl:
+    log("Error: Mesh Animation Add Keyframe menu entry not found")
+    log(dump_ui())
+    exit(1)
+ctl.click()
+wait_time(0.2)
+log("OK: Timeline menu action clicked")
+exit(0)

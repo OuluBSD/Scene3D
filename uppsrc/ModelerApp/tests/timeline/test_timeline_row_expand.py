@@ -1,0 +1,12 @@
+log("test_timeline_row_expand start")
+wait_ready()
+wait_time(0.3)
+row = find("Edit/Transform")
+if not row:
+    log("Error: Transform menu entry not found")
+    log(dump_ui())
+    exit(1)
+row.click()
+wait_time(0.2)
+log("OK: Transform menu entry clicked")
+exit(0)

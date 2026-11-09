@@ -1,0 +1,12 @@
+log("test_material_preview_click start")
+wait_ready()
+wait_time(0.3)
+preview = find("View/Texture Editor")
+if not preview:
+    log("Error: Texture Editor menu entry not found")
+    log(dump_ui())
+    exit(1)
+preview.click()
+wait_time(0.2)
+log("OK: Texture Editor menu entry clicked")
+exit(0)

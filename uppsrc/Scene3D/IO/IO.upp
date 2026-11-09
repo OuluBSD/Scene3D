@@ -1,0 +1,21 @@
+uses
+	CtrlCore,
+	Geometry,
+	ComputerVision,
+	Scene3D/Core;
+
+file
+	AGENTS.md,
+	IO.h,
+	Scene3DFormat.md,
+	Scene3DIO.h,
+	Scene3DIO.cpp,
+	PointcloudSim.h,
+	PointcloudSim.cpp,
+	StagedVideoImporter.h,
+	StagedVideoImporter.cpp,
+	VideoImporter.h,
+	VideoImporter.cpp;
+
+mainconfig
+	"" = "";

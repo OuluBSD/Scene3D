@@ -1,0 +1,40 @@
+description "AnimEdit - Animation editor application";
+
+uses
+	Core;
+uses
+	CtrlCore;
+uses
+	CtrlLib;
+uses
+	AnimEditLib;
+
+file
+	AnimEdit.cpp,
+	AnimEditMain.h,
+	AnimEditMain.cpp,
+	AnimEditorState.h,
+	AnimCanvasCtrl.h,
+	AnimCanvasCtrl.cpp,
+	SpriteListCtrl.h,
+	SpriteListCtrl.cpp,
+	TimelineCtrl.h,
+	TimelineCtrl.cpp,
+	FrameListCtrl.h,
+	FrameListCtrl.cpp,
+	AnimListCtrl.h,
+	AnimListCtrl.cpp,
+	SpriteInstanceListCtrl.h,
+	SpriteInstanceListCtrl.cpp,
+	CollisionListCtrl.h,
+	CollisionListCtrl.cpp,
+	EntityListCtrl.h,
+	EntityListCtrl.cpp,
+	EntityPropertiesCtrl.h,
+	EntityPropertiesCtrl.cpp,
+	EntityPreviewCtrl.h,
+	EntityPreviewCtrl.cpp,
+	BehaviorTreeEditorCtrl.h,
+	BehaviorTreeEditorCtrl.cpp,
+	StateMachineEditorCtrl.h,
+	StateMachineEditorCtrl.cpp;

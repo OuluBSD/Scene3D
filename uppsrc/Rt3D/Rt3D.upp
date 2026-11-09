@@ -1,0 +1,23 @@
+description "Tesseract-Sauerbraten engine code ported to U++ (octree, map IO, anim models)";
+
+uses
+	Core;
+
+file
+	AGENTS.md,
+	Rt3D.h,
+	Math.h,
+	Octree.h,
+	Octree.cpp,
+	AnimModel.h,
+	AnimModel.cpp,
+	MapIO.h,
+	MapIO.cpp,
+	SubOctree.h,
+	SubOctree.cpp,
+	SkelModel.h,
+	SkelModel.cpp,
+	SkelMesh.h,
+	SkelMesh.cpp,
+	Iqm.h,
+	Iqm.cpp;

@@ -1,0 +1,186 @@
+name: Scene3D CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  posix:
+    name: POSIX (${{ matrix.os }} - ${{ matrix.cxx }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            cc: clang
+            cxx: clang++
+            method: CLANG
+          - os: ubuntu-latest
+            cc: gcc
+            cxx: g++
+            method: GCC
+          - os: macos-latest
+            cc: clang
+            cxx: clang++
+            method: CLANG_macOS
+
+    steps:
+      - name: Checkout Scene3D
+        uses: actions/checkout@v4
+        with:
+          path: Scene3D
+
+      - name: Checkout UppBootstrap
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppBootstrap
+          path: UppBootstrap
+
+      - name: Checkout UppBuilder
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppBuilder
+          path: UppBuilder
+
+      - name: Checkout BazaarCore
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/BazaarCore
+          path: BazaarCore
+
+      - name: Checkout UppGeometry
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppGeometry
+          path: UppGeometry
+
+      - name: Checkout Upstream U++ (ultimatepp)
+        uses: actions/checkout@v4
+        with:
+          repository: ultimatepp/ultimatepp
+          path: ultimatepp
+
+      - name: Install System Dependencies (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libgtk-3-dev libx11-dev libasound2-dev libnotify-dev
+
+      - name: Install System Dependencies (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          brew install ninja || true
+
+      - name: Bootstrap umk with UppBootstrap
+        run: |
+          cd UppBootstrap
+          export CC=${{ matrix.cc }}
+          export CXX=${{ matrix.cxx }}
+          bash bootstrap.sh
+          echo "$GITHUB_WORKSPACE/ultimatepp/bin" >> $GITHUB_PATH
+
+      - name: Bootstrap UppBuilder
+        run: |
+          umk BazaarCore/patched-uppsrc,BazaarCore/uppsrc,UppBuilder/uppsrc,UppBuilder/src UppBuilder "${{ matrix.method }}" -b -buH4 +DEBUG "$GITHUB_WORKSPACE/UppBuilder/bin/uppbuilder"
+          echo "$GITHUB_WORKSPACE/UppBuilder/bin" >> $GITHUB_PATH
+
+      - name: Verify umk and UppBuilder
+        run: |
+          which umk || true
+          which uppbuilder || true
+          uppbuilder --version || true
+
+      - name: Materialize Patched BazaarCore Assembly
+        run: |
+          cd BazaarCore
+          uppbuilder --bazaarcore . --upstream "$GITHUB_WORKSPACE/ultimatepp/uppsrc" --apply-patches -v
+
+      - name: Build & Run SceneCheck (${{ matrix.method }})
+        run: |
+          cd Scene3D
+          uppbuilder tests/SceneCheck -m "${{ matrix.method }}" --bazaarcore "$GITHUB_WORKSPACE/BazaarCore" --uppgeometry "$GITHUB_WORKSPACE/UppGeometry" -v
+          ./bin/SceneCheck
+
+  windows:
+    name: Windows (${{ matrix.os }} - MSVC)
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+
+    steps:
+      - name: Checkout Scene3D
+        uses: actions/checkout@v4
+        with:
+          path: Scene3D
+
+      - name: Checkout UppBootstrap
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppBootstrap
+          path: UppBootstrap
+
+      - name: Checkout UppBuilder
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppBuilder
+          path: UppBuilder
+
+      - name: Checkout BazaarCore
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/BazaarCore
+          path: BazaarCore
+
+      - name: Checkout UppGeometry
+        uses: actions/checkout@v4
+        with:
+          repository: OuluBSD/UppGeometry
+          path: UppGeometry
+
+      - name: Checkout Upstream U++ (ultimatepp)
+        uses: actions/checkout@v4
+        with:
+          repository: ultimatepp/ultimatepp
+          path: ultimatepp
+
+      - name: Setup MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Bootstrap umk with UppBootstrap
+        shell: cmd
+        run: |
+          cd UppBootstrap
+          call bootstrap.bat
+          echo %GITHUB_WORKSPACE%\ultimatepp\bin>> %GITHUB_PATH%
+
+      - name: Bootstrap UppBuilder
+        shell: cmd
+        run: |
+          umk.exe "%GITHUB_WORKSPACE%\BazaarCore\patched-uppsrc,%GITHUB_WORKSPACE%\BazaarCore\uppsrc,%GITHUB_WORKSPACE%\UppBuilder\uppsrc,%GITHUB_WORKSPACE%\UppBuilder\src" UppBuilder MSVS22x64 -b -buH4 +DEBUG "%GITHUB_WORKSPACE%\UppBuilder\bin\uppbuilder.exe"
+          echo %GITHUB_WORKSPACE%\UppBuilder\bin>> %GITHUB_PATH%
+
+      - name: Verify umk and UppBuilder
+        shell: cmd
+        run: |
+          where umk.exe
+          where uppbuilder.exe
+          uppbuilder.exe --version
+
+      - name: Materialize Patched BazaarCore Assembly
+        shell: cmd
+        run: |
+          cd BazaarCore
+          uppbuilder.exe --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" --upstream "%GITHUB_WORKSPACE%\ultimatepp\uppsrc" --apply-patches -v
+
+      - name: Build & Run SceneCheck (MSVC)
+        shell: cmd
+        run: |
+          cd Scene3D
+          uppbuilder.exe tests/SceneCheck -m MSVS22x64 --bazaarcore "%GITHUB_WORKSPACE%\BazaarCore" --uppgeometry "%GITHUB_WORKSPACE%\UppGeometry" -v
+          bin\SceneCheck.exe

@@ -1,0 +1,14 @@
+uses
+	Scene3D/Core,
+	Scene3D/IO,
+	Scene3D/Render,
+	Scene3D/Anim,
+	Scene3D/Remote,
+	Scene3D/Exec;
+
+file
+	AGENTS.md,
+	Scene3D.h;
+
+mainconfig
+	"" = "";

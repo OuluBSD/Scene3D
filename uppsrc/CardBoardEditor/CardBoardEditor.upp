@@ -1,0 +1,30 @@
+description "Card game board editor and structural renderer";
+
+uses
+	Core,
+	CtrlLib,
+	Docking,
+	plugin/png,
+	plugin/jpg;
+
+file
+	AGENTS.md,
+	CardBoardEditor.h,
+	CardBoardTypes.h,
+	CardBoardDocument.h,
+	CardBoardRenderer.h,
+	CardBoardCanvas.h,
+	CardBoardPanels.h,
+	CardBoardEditorWindow.h,
+	CardBoardDocument.cpp,
+	CardBoardRenderer.cpp,
+	CardBoardCanvas.cpp,
+	CardBoardPanels.cpp,
+	CardBoardEditorWindow.cpp,
+	main.cpp;
+
+mainconfig
+	"" = "GUI",
+	"" = "GUI X11",
+	"" = "GUI USEMALLOC",
+	"" = "GUI X11 USEMALLOC";

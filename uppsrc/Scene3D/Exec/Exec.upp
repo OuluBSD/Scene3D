@@ -1,0 +1,16 @@
+uses
+	Scene3D/Core,
+	Scene3D/IO,
+	ByteVM,
+	Geometry,
+	Core/TextParsing,
+	SoftPhys,
+	AI/Core/Base;
+
+file
+	AGENTS.md,
+	Exec.h,
+	Exec.cpp;
+
+mainconfig
+	"" = "";

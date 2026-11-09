@@ -1,0 +1,12 @@
+log("test_tree_find_scene start")
+wait_ready()
+wait_time(0.3)
+scene = find("Windows/All/Scene Tree")
+if not scene:
+    log("Error: Scene Tree menu entry not found")
+    log(dump_ui())
+    exit(1)
+scene.click()
+wait_time(0.2)
+log("OK: Scene Tree menu entry found and clicked")
+exit(0)
