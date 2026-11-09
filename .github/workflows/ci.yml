@@ -78,7 +78,7 @@ jobs:
       - name: Install System Dependencies (macOS)
         if: runner.os == 'macOS'
         run: |
-          brew install libpng lz4 pcre2 xxhash zstd xz bzip2
+          brew install libpng lz4 pcre2 xxhash zstd xz bzip2 assimp
           echo "CPATH=/opt/homebrew/include" >> "$GITHUB_ENV"
           echo "LIBRARY_PATH=/opt/homebrew/lib" >> "$GITHUB_ENV"
 

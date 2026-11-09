@@ -673,7 +673,7 @@ bool Rt3IqmModel::AppendAnims(Rt3Skeleton& skel, const String& path, String& err
 		// The frame channels are consumed in mask order per bone, and the
 		// cursor is a pointer into the file's channel stream - which is why
 		// the unused size channels still have to be stepped over.
-		const word* animdata = &framechannels[(int64)ia.firstframe * hdr.numframechannels];
+		const word* animdata = &framechannels[(int)((int64)ia.firstframe * hdr.numframechannels)];
 		for(int j = 0; j < (int)ia.numframes; j++)
 		{
 			Rt3DualQuat* frame = &skel.framebones[(startframe + j) * skel.numbones];

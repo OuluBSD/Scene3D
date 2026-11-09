@@ -200,7 +200,7 @@ void Rt3GenFaceVerts(const Rt3Cube& c, int orient, Rt3IVec v[4])
 
 bool Rt3InsideWorld(const Rt3IVec& o, int worldsize)
 {
-	return uint(o.x) < uint(worldsize) && uint(o.y) < uint(worldsize) && uint(o.z) < uint(worldsize);
+	return (unsigned int)(o.x) < (unsigned int)(worldsize) && (unsigned int)(o.y) < (unsigned int)(worldsize) && (unsigned int)(o.z) < (unsigned int)(worldsize);
 }
 
 // octa.cpp's `validatec`, with one branch deliberately not ported: upstream
