@@ -28,6 +28,9 @@ Visual card board layout editor and structural renderer.
 ### 5. `ModelerApp`
 3D modeling and geometry projection editor.
 
+### 6. `SoftRend`
+Software rendering engine implementing programmable vertex/pixel shaders, depth buffering, framebuffers, and raster pipelines independent of GPU hardware.
+
 ---
 
 ## Building

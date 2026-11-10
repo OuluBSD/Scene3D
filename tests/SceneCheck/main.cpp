@@ -2,6 +2,7 @@
 #include <Geometry/Geometry.h>
 #include <Rt3D/Rt3D.h>
 #include <AnimEditLib/AnimCore.h>
+#include <SoftRend/SoftRend.h>
 
 using namespace Upp;
 
@@ -33,6 +34,21 @@ CONSOLE_APP_MAIN
 	elem.texture = 42;
 	ASSERT(elem.texture == 42);
 	Cout() << "PASS: Rt3ElementSet initialized\n";
+
+	// 3. Test SoftRend software rasterizer pipeline
+	Cout() << "\n[3] Testing SoftRend pipeline & framebuffers...\n";
+	SoftFramebuffer fb;
+	fb.Clear();
+	ASSERT(fb.GetSize() == Size(0, 0));
+	Cout() << "PASS: SoftFramebuffer initialized\n";
+
+	SoftRend sr;
+	sr.SetSmoothShading(true);
+	sr.SetDepthTest(true);
+	sr.SetViewport(Size(800, 600));
+	sr.ClearTargets();
+	ASSERT(sr.GetTargets() == (GVar::RenderTarget)0);
+	Cout() << "PASS: SoftRend state machine configured\n";
 
 	Cout() << "\n========================================\n";
 	Cout() << "ALL SceneCheck TESTS PASSED SUCCESSFULLY!\n";

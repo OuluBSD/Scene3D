@@ -2,7 +2,8 @@ uses
 	Core,
 	Geometry,
 	Rt3D,
-	AnimEditLib;
+	AnimEditLib,
+	SoftRend;
 
 file
 	main.cpp;
