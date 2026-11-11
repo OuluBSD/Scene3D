@@ -1,0 +1,24 @@
+description "TeapotRenderer2";
+
+uses
+	Core,
+	ByteVM/Python,
+	Geometry,
+	SoftGraphics,
+	CtrlCore,
+	CtrlLib;
+
+file
+	AGENTS.md,
+	main.cpp,
+	TeapotWindow.h,
+	TeapotWindow.cpp,
+	teapot.cpp,
+	teapot.h,
+	shaders/basic.h,
+	shaders/pbr.h,
+	shaders/wireframe.h;
+
+mainconfig
+	"" = "GUI";
+	"flagGUI GUI" = "GUI";

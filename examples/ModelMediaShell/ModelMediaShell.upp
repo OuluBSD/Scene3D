@@ -1,0 +1,15 @@
+uses
+	CtrlLib,
+	Scene3D,
+	Geometry,
+	Vfs/Core;
+
+file
+	AGENTS.md,
+	main.cpp;
+
+mainconfig
+	"Gui" = "GUI ASSIMP",
+	"Gui (Valgrind)" = "GUI ASSIMP USEMALLOC",
+	"Headless" = "ASSIMP",
+	"Headless (Valgrind)" = "ASSIMP USEMALLOC";
